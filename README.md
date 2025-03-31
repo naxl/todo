@@ -1,2 +1,2 @@
-# todo
+# Todo
 Django-based Todo App!
