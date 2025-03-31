@@ -123,17 +123,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 import os
-STATIC_URL = '/static/'  # Ensure the slash at the beginning
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [  # List, not a set
-    os.path.join(BASE_DIR, "public\static")  
-]
+STATICFILES_DIR = {
+    os.path.join(BASE_DIR, "public\static")
+}
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public\static')
 MEDIA_URL = '/media/'
 
-NONE_IMG = os.path.join(r'images\None-Image\none-img.png')
+NONE_IMG = os.path.join('images/None-Image/none-img.png')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
