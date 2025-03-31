@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block 'title' %}
+<title>Todo</title>
+{% endblock %}
+
+{% block 'content' %}
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg b-20" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Todo App</h2>
+        <hr>
+        <div class="form-group mt-3">
+            <label for="name">Title of the task</label>
+            <input type="text" class="form-control b-10" id="name" placeholder="Enter the title of the task here" name="name" required>
+        </div>
+        <div class="form-group mt-3">
+            <label for="description">Description</label>
+            <textarea class="form-control b-10" id="description" placeholder="Write about the task here!" name="description" required></textarea>
+        </div>
+        <div class="form-group mt-3">
+            <label class="form-check-label" for="attachment">Attachments</label>
+            <input type="file" class="form-control b-10" id="attachment" name="attachment">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 b-10">Add Task !</button>
+      </form>
+      <div class="table-responsive card shadow overflow-hidden mt-5 mb-5 col-9 mx-auto b-20">
+        <table class="table table-bordered table-hover m-0">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Task Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Attachments</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="align-middle">
+                {% for i in all_todos %}
+                <tr>
+                    <th class="text-center" scope="row" >{{ forloop.counter }}</th>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.description }}</td>
+                    <td class="text-center">
+                        <img src="/media/{{ i.attachment }}" alt="image" class="img-thumbnail mx-ht">
+                    </td>
+                    <td class="text-center">
+                        <a href="/update/{{ i.id }}" class="btn btn-primary b-10">Update</a>
+                        <a href="/delete/{{ i.id }}" class="btn btn-danger b-10">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
