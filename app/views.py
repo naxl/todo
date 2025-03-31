@@ -12,7 +12,7 @@ def index(request):
             Todo.objects.create(
                 name = data.get('name'),
                 description = data.get("description"),
-                attachment = os.path.join(settings.NONE_IMG)
+                attachment = os.path.join('none.png')
             )
         else:
             Todo.objects.create(
@@ -29,7 +29,7 @@ def index(request):
 
 def delete_todo(request, id):
     obj = Todo.objects.get(id = id)
-    if not 'none-img.png' in str(obj.attachment):
+    if str(obj.attachment) != 'none.png':
             img_path = settings.MEDIA_ROOT + '/'+ str(obj.attachment)
             obj.delete()
             os.remove(img_path)
@@ -45,11 +45,11 @@ def update_todo(request, id):
         obj.description = data.get("description")
         attachment_new = request.FILES.get("attachment")
         if attachment_new == None:
-            none_image = os.path.join(settings.NONE_IMG)
-            if not 'none-img.png' in str(obj.attachment):
+            none_image = os.path.join('none.png')
+            if str(obj.attachment) != 'none.png':
                 img_path = settings.MEDIA_ROOT + '/'+ str(obj.attachment)
                 os.remove(img_path)
-                none_image = os.path.join(settings.NONE_IMG)
+                none_image = os.path.join('none.png')
                 obj.attachment = none_image
                 obj.save()
         else:
