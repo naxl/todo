@@ -30,7 +30,7 @@ def index(request):
 def delete_todo(request, id):
     obj = Todo.objects.get(id = id)
     if not 'none-img.png' in str(obj.attachment):
-            img_path = settings.MEDIA_ROOT + '\\'+ str(obj.attachment).replace("/", "\\")
+            img_path = settings.MEDIA_ROOT + '/'+ str(obj.attachment)
             obj.delete()
             os.remove(img_path)
     else:
@@ -47,7 +47,7 @@ def update_todo(request, id):
         if attachment_new == None:
             none_image = os.path.join(settings.NONE_IMG)
             if not 'none-img.png' in str(obj.attachment):
-                img_path = settings.MEDIA_ROOT + '\\'+ str(obj.attachment).replace("/", "\\")
+                img_path = settings.MEDIA_ROOT + '/'+ str(obj.attachment)
                 os.remove(img_path)
                 none_image = os.path.join(settings.NONE_IMG)
                 obj.attachment = none_image
